@@ -250,7 +250,7 @@ function Home() {
         </div>
       </div>
       <hr className='m-4'/>
-      <button onClick={handleApi} className='h-8 w-[40%] bg-blue-700 text-white font-semibold rounded-lg m-auto block mb-3 hover:bg-blue-800 transform hover:scale-105'>Convert Currency</button>
+      <button onClick={handleApi} className='h-8 w-4/5 sm:w-[40%] bg-blue-700 text-white font-semibold rounded-lg m-auto block mb-3 hover:bg-blue-800 transform hover:scale-105'>Convert Currency</button>
     </div>
   )
 }
