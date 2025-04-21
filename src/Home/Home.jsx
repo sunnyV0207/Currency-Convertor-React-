@@ -172,6 +172,7 @@ function Home() {
     const [fromcurrency,setfromcurrency]=useState("USD")
     const [tocurrency,settocurrency]=useState("INR")
     const [countries,setcountries] = useState({})
+    const [symbol,setSymbol] = useState("");
 
     let getcountry=async()=>{
         let url="https://api.frankfurter.app/currencies"
@@ -185,7 +186,7 @@ function Home() {
         setAmount(e.target.value)
     }
 
-    const handleApi = ()=>{
+    const handleApis = ()=>{
         const url = `https://v6.exchangerate-api.com/v6/7952fd9e1d05b1c21e113bcc/latest/${fromcurrency}`
         axios.get(url)
         .then((res)=>{
@@ -196,6 +197,8 @@ function Home() {
         .catch((e)=>{
             console.log(e)
         })
+
+        getSymbol()
     }
 
     const handleReverse = ()=>{
@@ -204,18 +207,32 @@ function Home() {
         settocurrency(fromCurr);
     }
 
+    const getSymbol = ()=>{
+        let url = `https://restcountries.com/v3.1/alpha/${countryList[tocurrency]}`
+        axios.get(url)
+        .then((res)=>{
+            let code = tocurrency
+            let data = res.data[0].currencies[code].symbol;
+            setSymbol(data);
+        })
+        .catch((e)=>{
+            console.log(e);
+        })
+    }
+
     useEffect(()=>{
+        getSymbol()
         getcountry()
-        handleApi()
+        handleApis()
     },[])
 
     
 
   return (
-    <div className='h-fit w-4/5 sm:w-[60%] md:w-1/2 lg:w-[40%] rounded-lg py-2 px-4 bg-white'>
+    <div className='h-fit w-[90%] sm:w-[60%] md:w-1/2 lg:w-[40%] rounded-lg py-2 px-4 bg-white'>
       <p className='text-center text-2xl font-semibold italic mb-4'>Currency Convertor</p>
       <hr className='m-4'/>
-      {price ? <><p className='text-center text-2xl font-semibold'>{price}</p><p className='text-center mb-6'>Converted Currency&nbsp;{`(${tocurrency})`}</p></> : null}
+      {price ? <><p className='text-center text-2xl font-semibold'>{symbol}&nbsp;{price}</p><p className='text-center mb-6'>Converted Currency&nbsp;{`(${tocurrency})`}</p></> : null}
       <input type="number" min={1} name='amount' id='inp-box' value={amount} onChange={handleInput} className='w-[70%] block mx-auto mb-10 rounded-md outline-none px-4 py-1 text-sm font-semibold bg-gray-200'/>
       <div className='w-[80%] mx-auto flex flex-col md:flex-row justify-between items-center mb-10'>
         <div className='h-[2rem] w-[60%] md:w-[40%] mb-3 md:mb-0 border-[1px] border-black flex flex-row justify-between items-center px-2 rounded-md'>
@@ -250,7 +267,7 @@ function Home() {
         </div>
       </div>
       <hr className='m-4'/>
-      <button onClick={handleApi} className='h-8 w-4/5 sm:w-[40%] bg-blue-700 text-white font-semibold rounded-lg m-auto block mb-3 hover:bg-blue-800 transform hover:scale-105'>Convert Currency</button>
+      <button onClick={handleApis} className='h-8 w-4/5 sm:w-[40%] bg-blue-700 text-white font-semibold rounded-lg m-auto block mb-3 hover:bg-blue-800 transform hover:scale-105'>Convert Currency</button>
     </div>
   )
 }
