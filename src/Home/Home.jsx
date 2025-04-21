@@ -233,7 +233,7 @@ function Home() {
         </div>
         <div className='h-[2rem] w-[10%] mb-3 md:mb-0  flex flex-row justify-center items-center'>
             <i className="hidden md:flex fa-solid fa-arrow-right-arrow-left cursor-pointer" onClick={handleReverse}></i>
-            <i className="md:hidden fa-solid fa-arrow-up-arrow-down cursor-pointer" onClick={handleReverse}></i>
+            <i className="md:hidden fa-solid fa-arrows-up-down cursor-pointer" onClick={handleReverse}></i>
         </div>
         <div className='h-[2rem] w-[60%] md:w-[40%] border-[1px] border-black mb-3 md:mb-0 flex flex-row justify-between items-center px-2 rounded-md'>
             <img src={`https://flagsapi.com/${countryList[tocurrency]}/flat/64.png`} alt="" className='h-[85%] w-[20%] md:w-[25%] rounded-md'/>
