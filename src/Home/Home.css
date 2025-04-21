@@ -1,0 +1,7 @@
+.app{
+    background-color: #111929; /* dark navy background */
+    background-image: 
+      linear-gradient(to right, rgba(134, 52, 211, 0.16) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(134, 52, 211, 0.16) 1px, transparent 1px);
+    background-size: 28px 28px; /* adjust based on your grid spacing */
+  }
